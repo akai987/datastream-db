@@ -1,0 +1,19 @@
+version: "3.8"
+networks:
+  network_datastream:
+services:
+  postgresql_datastream:
+    image: postgres
+    build: ./postgres/dataDatastream
+    container_name: datastream_db
+    restart: always
+    environment:
+      POSTGRES_DB: datastream_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432  
+    volumes:
+      - ./postgres/dataDatastream:/var/lib/postgresql/dataDatastream
+    networks:
+      - network_datastream
