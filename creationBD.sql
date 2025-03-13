@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS citus;
+
 CREATE OR REPLACE PROCEDURE createMesureTable (_MesureName VARCHAR(50))
     LANGUAGE plpgsql AS
     $func$
