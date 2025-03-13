@@ -1,5 +1,28 @@
 CREATE EXTENSION IF NOT EXISTS citus;
 
+CREATE SCHEMA IF NOT EXISTS sde;
+
+CREATE TABLE IF NOT EXISTS sde.sde_layers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    minz INTEGER,
+    maxz INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS sde.sde_spatial_references (
+    srid INTEGER PRIMARY KEY,
+    auth_name VARCHAR(50),
+    auth_srid INTEGER,
+    srtext TEXT
+);
+
+CREATE OR REPLACE FUNCTION sde.st_geometry_release_installed()
+RETURNS TEXT AS $$
+BEGIN
+    RETURN 'ST Geometry Release Installed';
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE OR REPLACE PROCEDURE createMesureTable (_MesureName VARCHAR(50))
     LANGUAGE plpgsql AS
     $func$
